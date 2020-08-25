@@ -10,7 +10,7 @@ export default [
         title: 'Les Jeux Video',
         id: 1,
         minPrice: 10000,
-        maxPrice: 10000,
+        maxPrice: 18000,
         shippingPrice: 120,
         optionsList: [
             {
@@ -32,7 +32,7 @@ export default [
         title: 'Les Chaussures',
         id: 2,
         minPrice: 10000,
-        maxPrice: 10000,
+        maxPrice: 17000,
         shippingPrice: 120,
         optionsList: [
             {
@@ -54,7 +54,7 @@ export default [
         title: 'Les Ordinateurs',
         id: 3,
         minPrice: 10000,
-        maxPrice: 10000,
+        maxPrice: 17000,
         shippingPrice: 120,
         optionsList: [
             {
@@ -76,7 +76,7 @@ export default [
         title: 'Les Televisions',
         id: 4,
         minPrice: 10000,
-        maxPrice: 10000,
+        maxPrice: 17000,
         shippingPrice: 120,
         optionsList: [
             {
@@ -98,7 +98,7 @@ export default [
         title: 'Les Cameras',
         id: 5,
         minPrice: 10000,
-        maxPrice: 10000,
+        maxPrice: 18000,
         shippingPrice: 120,
         optionsList: [
             {

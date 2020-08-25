@@ -1,17 +1,40 @@
 import React from 'react';
 import ReactSlider from 'react-slider'
+import styled from "styled-components"
 
-export default () => {
-    const inputEl = React.useRef(null);
-    const onButtonClick = () => {
-        // `current` points to the mounted text input element
-        // inputEl.current.resize();
-        console.log(inputEl.current)
-    };
-    return (
-        <>
-        <input ref={inputEl} type="text" />
-        <button onClick={onButtonClick}>Focus the input</button>
-        </>
-  );
-}
+const StyledSlider = styled(ReactSlider)`
+    width: 100%;
+    height: 25px;
+`
+
+const StyledThumb = styled.div.attrs({
+    className: 'h-10 w-5 top-10 bg-blue-900 shadow-md rounded-md'
+})`
+    cursor: grab;
+`
+
+const Thumb = (props, state) => <StyledThumb {...props}></StyledThumb>;
+
+const StyledTrack = styled.div.attrs((props) => ({
+    className:`
+        rounded-md
+        ${props.index === 1 ? 'bg-gray-300' : 'bg-blue-700'}
+    `
+}))`
+    top: 0;
+    bottom: 0;
+`
+
+const Track = (props, state) => <StyledTrack {...props} index={state.index} currValue={state.currValue} />;
+
+export default ({ onChange, min, max }) => (
+    <StyledSlider
+        defaultValue={[min + ((max - min)/2)]}
+        min={min}
+        max={max}
+        renderTrack={Track}
+        renderThumb={Thumb}
+        onChange={onChange}
+        className='flex items-center'
+    />
+)

@@ -1,8 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 import { ImageContainer, Text, RedButton } from '../assets/styles'
+import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
+import { CHOOSE_PRICE_DESCRIPTION, CATEGORY_DESCRIPTION } from '../assets/styles/textStrings'
 import data from '../assets/data/categoriesData'
 import Slider from './Slider.js'
+
+
 
 export default () => {
     const { categoryId } = useParams()
@@ -10,32 +14,56 @@ export default () => {
     const selectedList = []
 
     React.useEffect(() => {
-        window.scrollTo(0, 0);
+        if (myPrice === 0)
+            window.scrollTo(0, 0)
     })
+
+    const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
 
     return (
         <div className='w-full h-auto pt-16'>
             <ImageContainer>
-                <Text fontSize={'2.5em'} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
+                <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
                 <img src={category.img} alt={category.title} className='h-full' />
             </ImageContainer>
 
-            <Text className='text-gray-800 my-6' fontSize={'1.3em'}>
-                Choisissez les meilleures options qui décrivent le produit que vous voulez.
+            <Text className='text-gray-800 mb-16 mt-5' fontSize={SMALL_TEXT}>
+                {CATEGORY_DESCRIPTION}
             </Text>
 
-            <hr className='mb-5'/>
-
             {
-                category.optionsList.map(options => <Option 
+                category.optionsList.map((options, index) => <Option 
+                    key={index}
                     optionData={options}
                     selectedList={selectedList}
-                    optionIndex={1}
+                    optionIndex={index}
                 />)
             }
 
-            <div>
+            <div className='my-8'>
+                <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
+                    Choose The Price You Want To Pay
+                </Text>
+                <Slider 
+                    onChange={(val) => (setMyPrice(val))} 
+                    min={category.minPrice}
+                    max={category.maxPrice}
+                />
+                <div className='flex justify-between my-3'>
+                    <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                        Minimum Prix: {category.minPrice} CFA
+                    </Text>
+                    <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                        Votre Prix: {myPrice} CFA
+                    </Text>
+                    <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                        Maximum Prix: {category.maxPrice} CFA
+                    </Text>
+                </div>
 
+                <Text fontSize={SMALL_TEXT} className='text-gray-800'>
+                    {CHOOSE_PRICE_DESCRIPTION}
+                </Text>
             </div>
 
             <RedButton 
@@ -47,7 +75,6 @@ export default () => {
                 Submit //TODO
             </RedButton>
 
-            <Slider />
         </div>
     )
 }
@@ -61,7 +88,7 @@ const Option = ({ optionData, selectedList, optionIndex }) => {
 
     return (
         <div>
-            <Text fontSize={'1.5em'} className='font-bold text-gray-800 py-4'>
+            <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
                 {optionData.title}
             </Text>
             <div className='w-full flex flex-wrap'>
@@ -81,9 +108,6 @@ const Option = ({ optionData, selectedList, optionIndex }) => {
         </div>
     )
 }
-
-// const OptionStyles = styled.div`
-// `
 
 const RadioButton = ({ active }) => {
     return (
