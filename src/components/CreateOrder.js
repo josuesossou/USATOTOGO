@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from "styled-components"
 import { useParams } from 'react-router-dom'
-import { ImageContainer, Text } from '../assets/styles'
+import { ImageContainer, Text, RedButton } from '../assets/styles'
 import data from '../assets/data/categoriesData'
+import Slider from './Slider.js'
 
 export default () => {
     const { categoryId } = useParams()
@@ -26,22 +26,33 @@ export default () => {
 
             <hr className='mb-5'/>
 
-            <Option 
-                options={['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']}
-                selectedList={selectedList}
-                optionIndex={1}
-            />
+            {
+                category.optionsList.map(options => <Option 
+                    optionData={options}
+                    selectedList={selectedList}
+                    optionIndex={1}
+                />)
+            }
 
-            <button onClick={() => {
-                console.log(selectedList)
-            }}>
+            <div>
+
+            </div>
+
+            <RedButton 
+                className='my-8'
+                onClick={() => {
+                    console.log(selectedList)
+                }}
+            >
                 Submit //TODO
-            </button>
+            </RedButton>
+
+            <Slider />
         </div>
     )
 }
 
-const Option = ({ options, selectedList, optionIndex }) => {
+const Option = ({ optionData, selectedList, optionIndex }) => {
     const [selected, setActive] = React.useState(-1)
     const setSelected = (option, index) => {
         setActive(index)
@@ -51,10 +62,10 @@ const Option = ({ options, selectedList, optionIndex }) => {
     return (
         <div>
             <Text fontSize={'1.5em'} className='font-bold text-gray-800 py-4'>
-                Choisissez La Brand (Title)
+                {optionData.title}
             </Text>
             <div className='w-full flex flex-wrap'>
-                {options.map((option, index) => (
+                {optionData.options.map((option, index) => (
                     <div 
                         key={index} 
                         className='flex items-center mb-6 mx-4' 
@@ -71,8 +82,8 @@ const Option = ({ options, selectedList, optionIndex }) => {
     )
 }
 
-const OptionStyles = styled.div`
-`
+// const OptionStyles = styled.div`
+// `
 
 const RadioButton = ({ active }) => {
     return (

@@ -77,6 +77,6 @@ export const ImageContainer = styled.div.attrs({
     height: 25vh;
 `
 /** Radio Button Style */
-export const RadioButton = styled.main.attrs((props) => ({
+export const SliderButton = styled.main.attrs((props) => ({
     className: `w-5 h-5 rounded-full border-2 border flex justify-center items-center`
 }))``

@@ -8,26 +8,111 @@ export default [
     {
         img: GameVid, 
         title: 'Les Jeux Video',
-        id: 1
+        id: 1,
+        minPrice: 10000,
+        maxPrice: 10000,
+        shippingPrice: 120,
+        optionsList: [
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            }
+        ]
     },
     {
         img: Shoes, 
         title: 'Les Chaussures',
-        id: 2
+        id: 2,
+        minPrice: 10000,
+        maxPrice: 10000,
+        shippingPrice: 120,
+        optionsList: [
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            }
+        ]
     },
     {
         img: Computer, 
         title: 'Les Ordinateurs',
-        id: 3
+        id: 3,
+        minPrice: 10000,
+        maxPrice: 10000,
+        shippingPrice: 120,
+        optionsList: [
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            }
+        ]
     },
     {
         img: TVS, 
         title: 'Les Televisions',
-        id: 4
+        id: 4,
+        minPrice: 10000,
+        maxPrice: 10000,
+        shippingPrice: 120,
+        optionsList: [
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            }
+        ]
     },
     {
         img: Camera, 
         title: 'Les Cameras',
-        id: 5
+        id: 5,
+        minPrice: 10000,
+        maxPrice: 10000,
+        shippingPrice: 120,
+        optionsList: [
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            },
+            {
+                title: 'Choisissez La Brand (Title)',
+                options: ['heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon', 'heelo', 'he', 'heelos', 'comeon']
+            }
+        ]
     },
 ]
