@@ -20,10 +20,13 @@ export default () => {
     const selectedList = []
     const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
     const [quantity, setQuantity] = React.useState(0)
+    const [scrollTop, setScrollTop] = React.useState(false)
 
     React.useEffect(() => {
-        if (myPrice === 0)
+        if (!scrollTop) {
             window.scrollTo(0, 0)
+            setScrollTop(true)
+        }
     })
 
 
