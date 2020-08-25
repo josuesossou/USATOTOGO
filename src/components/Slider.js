@@ -8,7 +8,7 @@ const StyledSlider = styled(ReactSlider)`
 `
 
 const StyledThumb = styled.div.attrs({
-    className: 'h-10 w-5 top-10 bg-blue-900 shadow-md rounded-md'
+    className: 'h-10 w-5 top-10 bg-blue-900 shadow-md'
 })`
     cursor: grab;
 `
@@ -17,7 +17,6 @@ const Thumb = (props, state) => <StyledThumb {...props}></StyledThumb>;
 
 const StyledTrack = styled.div.attrs((props) => ({
     className:`
-        rounded-md
         ${props.index === 1 ? 'bg-gray-300' : 'bg-blue-700'}
     `
 }))`

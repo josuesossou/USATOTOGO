@@ -29,8 +29,14 @@ export const RedButton = styled(Button).attrs({
 
 /* Link Type Button */
 export const ButtonLink = styled(Button).attrs({
-    className: "text-gray-700 border-transparent border-b-2 hover:border-gray-700 mx-6"
+    className: "text-gray-800 border-transparent border-b-2 hover:border-gray-700 mx-6"
 })``
+
+/** Styled Input */
+export const StyledInput = styled.div.attrs({
+    className: 'border border-3 border-blue-900 h-full w-full'
+})`
+`
 
 /** Background gradient */
 export const BgGradient = styled.div.attrs((props) => ({
@@ -76,7 +82,3 @@ export const ImageContainer = styled.div.attrs({
 })`
     height: 25vh;
 `
-/** Radio Button Style */
-export const SliderButton = styled.main.attrs((props) => ({
-    className: `w-5 h-5 rounded-full border-2 border flex justify-center items-center`
-}))``
