@@ -7,6 +7,7 @@ le produit est peut-être sale et peut ne pas être entièrement fonctionnel. En
 export const CHOOSE_PRICE_TITLE = `Choisissez le prix que vous voulez payer`
 export const QUANTITY_TITLE = `Quantité`
 export const SHIPPING_PRICE_TITLE = `Prix De Livraison`
+export const ERROR_MESSAGE = `Veuillez choisir une option pour chaque catégorie`
 
 // `Read Carefully: This is the price that you want to pay for the product. 
 // If the price is lower, you are risking the quality and condition of the product. This means that 

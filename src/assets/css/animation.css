@@ -1,0 +1,19 @@
+.fade-in-mycl {
+    animation: fadeIn 500ms ease-in forwards;
+    opacity: 0;
+}
+
+.fade-out-mycl {
+    animation: fadeOut 500ms ease-in forwards;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}

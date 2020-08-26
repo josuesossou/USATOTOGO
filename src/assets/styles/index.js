@@ -41,7 +41,7 @@ export const StyledInput = styled.div.attrs({
 
 /** Background gradient */
 export const BgGradient = styled.div.attrs((props) => ({
-    className: ` bg-gradient-to-l w-full`
+    className: `bg-gradient-to-l w-full`
 }))`
     animation: fadeIn 2s linear forwards;
     position: absolute;

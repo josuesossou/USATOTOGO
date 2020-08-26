@@ -1,40 +1,38 @@
 import React from 'react'
 import { Text, Button, } from '../assets/styles'
-import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
+import { SMALL_TEXT, MEDIUM_TEXT, EX_SMALL_TEXT } from '../assets/styles/fontSizes'
 import CloseIcon from '../assets/images/close@2x.png'
+import '../assets/css/animation.css'
 
 /**
  * @param {string} message the message to display
+ * @param {boolean} show the message to display
+ * @param {function} closeCallback the message to display
  */
-export default ({ message }) => {
+export default ({ message, show, closeCallback }) => {
     const color = 'black'
-    const [show, changeShow] =  React.useState(true)
-    const [close, changeClose] = React.useState('alert-message-show')
+    const [fade, changeFade] = React.useState('fade-in-mycl')
 
-    setTimeout(() => {
-        changeClose('alert-message-hide')
-    } , 5000)
-
-    setTimeout(() => {
-        changeShow(false)
-    } , 5500)
-
-    const closeCallback = () => {
-        changeClose('alert-message-hide')
-        clearTimeout()
-
-        setTimeout(() => changeShow(false), 500)
+    const close = () => {
+        changeFade('fade-out-mycl')
+        setTimeout(() => {
+            closeCallback()
+            changeFade('fade-in-mycl')
+        }, 500)
     }
 
     return (
         show ? (
-            <div className={`fixed z-40 ${close}`} style={{ top: '6rem', left: '50%' }}>
-                <Text text={message} color={color}>
+            <div onClick={close}
+                className={`fixed z-40 ${fade} w-1/3 bg-red-200 shadow-lg cursor-pointer p-3`} 
+                style={{ top: '6rem', left: '50%', transform: 'translateX(-50%)'}}
+            >
+                <Text fontSize={SMALL_TEXT} className='text-red-800 text-center'>
                     {message}
                 </Text>
-                <Button onClick={closeCallback} className='absolute top-0 right-0'>
-                    <img src={CloseIcon} alt='Close' />
-                </Button>
+                <Text fontSize={EX_SMALL_TEXT} className='text-red-800 absolute right-0 bottom-0'>
+                    Fermer
+                </Text>
             </div>
         ) : null
     )

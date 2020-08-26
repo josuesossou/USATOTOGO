@@ -10,7 +10,8 @@ import {
     CATEGORY_DESCRIPTION, 
     CHOOSE_PRICE_TITLE, 
     QUANTITY_TITLE,
-    SHIPPING_PRICE_TITLE
+    SHIPPING_PRICE_TITLE,
+    ERROR_MESSAGE
 } from '../assets/styles/textStrings'
 import data from '../assets/data/categoriesData'
 
@@ -21,7 +22,9 @@ export default () => {
     const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
     const [quantity, setQuantity] = React.useState(0)
     const [scrollTop, setScrollTop] = React.useState(false)
+    const [deliveryPrice, setDeliveryPrice] = React.useState(category.shippingPrice)
     const [alert, showAlert] = React.useState(false)
+    const [review, showReview] = React.useState(false)
 
     React.useEffect(() => {
         if (!scrollTop) {
@@ -31,17 +34,25 @@ export default () => {
     })
 
     const submitOrder = () => {
-        console.log('yes2')
         if (selectedList.includes(undefined) || selectedList.length === 0) {
             showAlert(true)
-            console.log('yes')
-            return; // error message component
+            return;
         }
+
+        const finalData = {
+            selectedList,
+            quantity,
+            myPrice,
+            deliveryPrice
+        }
+
+        showReview(true);
     }
 
     return (
         <div className='w-full h-auto pt-16'>
-            {alert ? <AlertMessage message={'hello'} /> : null} 
+            <AlertMessage message={ERROR_MESSAGE} show={alert} closeCallback={() => showAlert(false)} />
+
             <ImageContainer>
                 <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
                 <img src={category.img} alt={category.title} className='h-full' />
@@ -100,12 +111,13 @@ export default () => {
                         onChange={(direction) => {
                             if (quantity > 0 || (direction === 1)) {
                                 setQuantity(quantity + direction)
+                                setDeliveryPrice(category.shippingPrice + (category.shippingPrice/2) * (quantity + direction))
                             }
                         }}
                     />
 
                     <Text fontSize={SMALL_TEXT} className='font-bold'>
-                        {SHIPPING_PRICE_TITLE} {`${category.shippingPrice + (category.shippingPrice/2) * quantity}`} CFA
+                        {SHIPPING_PRICE_TITLE}: {deliveryPrice} CFA
                     </Text>
                 </div>
             </div>
@@ -125,7 +137,7 @@ const Option = ({ optionData, selectedList, optionIndex }) => {
     const [selected, setActive] = React.useState(-1)
     const setSelected = (option, index) => {
         setActive(index)
-        selectedList[optionIndex] = option
+        selectedList[optionIndex] = { option, title: optionData.title }
     }
 
     return (
