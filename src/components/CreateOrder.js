@@ -1,6 +1,9 @@
 import React from 'react';
+import Slider from './Slider'
+import NumberInput from './NumberInput'
+import AlertMessage from './AlertMessage'
 import { useParams } from 'react-router-dom'
-import { ImageContainer, Text, RedButton, StyledInput, Button } from '../assets/styles'
+import { ImageContainer, Text, RedButton, } from '../assets/styles'
 import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
 import { 
     CHOOSE_PRICE_DESCRIPTION, 
@@ -10,9 +13,6 @@ import {
     SHIPPING_PRICE_TITLE
 } from '../assets/styles/textStrings'
 import data from '../assets/data/categoriesData'
-import Slider from './Slider.js'
-
-
 
 export default () => {
     const { categoryId } = useParams()
@@ -21,6 +21,7 @@ export default () => {
     const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
     const [quantity, setQuantity] = React.useState(0)
     const [scrollTop, setScrollTop] = React.useState(false)
+    const [alert, showAlert] = React.useState(false)
 
     React.useEffect(() => {
         if (!scrollTop) {
@@ -29,9 +30,18 @@ export default () => {
         }
     })
 
+    const submitOrder = () => {
+        console.log('yes2')
+        if (selectedList.includes(undefined) || selectedList.length === 0) {
+            showAlert(true)
+            console.log('yes')
+            return; // error message component
+        }
+    }
 
     return (
         <div className='w-full h-auto pt-16'>
+            {alert ? <AlertMessage message={'hello'} /> : null} 
             <ImageContainer>
                 <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
                 <img src={category.img} alt={category.title} className='h-full' />
@@ -84,7 +94,7 @@ export default () => {
                     {QUANTITY_TITLE}
                 </Text>
 
-                <div className='mx-4 flex'>
+                <div className='mx-4 flex items-center'>
                     <NumberInput 
                         value={quantity}
                         onChange={(direction) => {
@@ -95,17 +105,14 @@ export default () => {
                     />
 
                     <Text fontSize={SMALL_TEXT} className='font-bold'>
-                        {SHIPPING_PRICE_TITLE} {`${category.shippingPrice + (category.shippingPrice/2) * quantity}`}
+                        {SHIPPING_PRICE_TITLE} {`${category.shippingPrice + (category.shippingPrice/2) * quantity}`} CFA
                     </Text>
                 </div>
             </div>
 
             <RedButton 
                 className='my-8'
-                onClick={() => {
-                    console.log(selectedList)
-                    //TODO
-                }}
+                onClick={submitOrder}
             >
                 Soumettre La Commande 
             </RedButton>
@@ -151,22 +158,3 @@ const RadioButton = ({ active }) => {
     )
 }
 
-const NumberInput = ({ value, onChange }) => {
-    return (
-        <div>
-            <StyledInput>
-                {value + 1}
-            </StyledInput>
-            <div>
-                <Button onClick={() => onChange(1)}>
-                    up
-                </Button>
-                
-                <Button onClick={() => onChange(-1)}>
-                    down
-                </Button>
-            </div>
-
-        </div>
-    )
-}

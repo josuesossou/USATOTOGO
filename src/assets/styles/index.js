@@ -18,13 +18,13 @@ import tw from "twin.macro"
 
 /* Button Shared Component */
 export const Button = styled.button.attrs({
-    className: "transition duration-500 ease-in-out text-lg h-12 w-auto cpointer"
+    className: "transition duration-500 ease-in-out text-lg"
 })`
     outline: 0 !important
 `
 
 export const RedButton = styled(Button).attrs({
-    className: "bg-red-600 text-red-100 hover:bg-red-700 hover:text-red-200 px-6"
+    className: "bg-red-600 h-12 text-red-100 hover:bg-red-700 hover:text-red-200 px-6"
 })``
 
 /* Link Type Button */
@@ -34,8 +34,9 @@ export const ButtonLink = styled(Button).attrs({
 
 /** Styled Input */
 export const StyledInput = styled.div.attrs({
-    className: 'border border-3 border-blue-900 h-full w-full'
+    className: 'border border-blue-700 h-full w-full'
 })`
+    border-width: 3px
 `
 
 /** Background gradient */
