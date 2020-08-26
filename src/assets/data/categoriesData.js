@@ -11,7 +11,7 @@ export default [
         id: 1,
         minPrice: 10000,
         maxPrice: 18000,
-        shippingPrice: 120,
+        shippingPrice: 1203,
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',
@@ -32,8 +32,8 @@ export default [
         title: 'Les Chaussures',
         id: 2,
         minPrice: 10000,
-        maxPrice: 17000,
-        shippingPrice: 120,
+        maxPrice: 1704200,
+        shippingPrice: 130,
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',
@@ -54,8 +54,8 @@ export default [
         title: 'Les Ordinateurs',
         id: 3,
         minPrice: 10000,
-        maxPrice: 17000,
-        shippingPrice: 120,
+        maxPrice: 1029000,
+        shippingPrice: 100,
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',
@@ -75,9 +75,9 @@ export default [
         img: TVS, 
         title: 'Les Televisions',
         id: 4,
-        minPrice: 10000,
-        maxPrice: 17000,
-        shippingPrice: 120,
+        minPrice: 100300,
+        maxPrice: 170040,
+        shippingPrice: 1240,
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',
@@ -97,9 +97,9 @@ export default [
         img: Camera, 
         title: 'Les Cameras',
         id: 5,
-        minPrice: 10000,
-        maxPrice: 18000,
-        shippingPrice: 120,
+        minPrice: 100200,
+        maxPrice: 180040,
+        shippingPrice: 1270,
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',

@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from './Slider'
 import NumberInput from './NumberInput'
 import AlertMessage from './AlertMessage'
+import Review from './Review'
 import { useParams } from 'react-router-dom'
 import { ImageContainer, Text, RedButton, } from '../assets/styles'
 import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
@@ -18,13 +19,13 @@ import data from '../assets/data/categoriesData'
 export default () => {
     const { categoryId } = useParams()
     const category = data[categoryId - 1]
-    const selectedList = []
+    const [selectedList, updateList] = React.useState([])
     const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
     const [quantity, setQuantity] = React.useState(0)
     const [scrollTop, setScrollTop] = React.useState(false)
     const [deliveryPrice, setDeliveryPrice] = React.useState(category.shippingPrice)
     const [alert, showAlert] = React.useState(false)
-    const [review, showReview] = React.useState(false)
+    const [review, updateReview] = React.useState({ show: false, reviewData: null })
 
     React.useEffect(() => {
         if (!scrollTop) {
@@ -34,25 +35,30 @@ export default () => {
     })
 
     const submitOrder = () => {
+        console.log(selectedList)
         if (selectedList.includes(undefined) || selectedList.length === 0) {
             showAlert(true)
             return;
         }
 
-        const finalData = {
+        review.show = true
+
+        review.reviewData = {
             selectedList,
             quantity,
             myPrice,
             deliveryPrice
         }
 
-        showReview(true);
+        updateReview(review)
+
+        console.log(review)
     }
 
     return (
         <div className='w-full h-auto pt-16'>
             <AlertMessage message={ERROR_MESSAGE} show={alert} closeCallback={() => showAlert(false)} />
-
+            <Review />
             <ImageContainer>
                 <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
                 <img src={category.img} alt={category.title} className='h-full' />
@@ -64,6 +70,7 @@ export default () => {
 
             {
                 category.optionsList.map((options, index) => <Option 
+                    updateList={updateList}
                     key={index}
                     optionData={options}
                     selectedList={selectedList}
@@ -133,11 +140,12 @@ export default () => {
     )
 }
 
-const Option = ({ optionData, selectedList, optionIndex }) => {
+const Option = ({ optionData, selectedList, optionIndex, updateList }) => {
     const [selected, setActive] = React.useState(-1)
     const setSelected = (option, index) => {
         setActive(index)
         selectedList[optionIndex] = { option, title: optionData.title }
+        updateList(selectedList)
     }
 
     return (
@@ -149,7 +157,7 @@ const Option = ({ optionData, selectedList, optionIndex }) => {
                 {optionData.options.map((option, index) => (
                     <div 
                         key={index} 
-                        className='flex items-center mb-6 mx-4' 
+                        className='flex items-center mb-6 mx-4 cursor-pointer' 
                         onClick={() => setSelected(option, index)}
                     >
                         <RadioButton active={selected === index} />
