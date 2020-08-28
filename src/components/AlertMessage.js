@@ -31,7 +31,7 @@ export default ({ message, show, closeCallback }) => {
                     {message}
                 </Text>
                 <Text fontSize={EX_SMALL_TEXT} className='text-red-800 absolute right-0 bottom-0'>
-                    Fermer
+                    Taper Pour Fermer
                 </Text>
             </div>
         ) : null

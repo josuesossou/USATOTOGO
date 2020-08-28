@@ -4,7 +4,9 @@ import { ImageContainer, Text, RedButton, Overlay} from '../assets/styles'
 export default () => {
     return (
         <Overlay>
-
+            <div>
+                
+            </div>
         </Overlay>
     )
 }

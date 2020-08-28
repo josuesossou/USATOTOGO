@@ -3,7 +3,7 @@ import Slider from './Slider'
 import NumberInput from './NumberInput'
 import AlertMessage from './AlertMessage'
 import Review from './Review'
-import { useParams } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { ImageContainer, Text, RedButton, } from '../assets/styles'
 import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
 import { 
@@ -16,129 +16,171 @@ import {
 } from '../assets/styles/textStrings'
 import data from '../assets/data/categoriesData'
 
-export default () => {
-    const { categoryId } = useParams()
-    const category = data[categoryId - 1]
-    const [selectedList, updateList] = React.useState([])
-    const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
-    const [quantity, setQuantity] = React.useState(0)
-    const [scrollTop, setScrollTop] = React.useState(false)
-    const [deliveryPrice, setDeliveryPrice] = React.useState(category.shippingPrice)
-    const [alert, showAlert] = React.useState(false)
-    const [review, updateReview] = React.useState({ show: false, reviewData: null })
+class CeateOrder extends React.Component {
+    constructor(props) {
+        super(props)
 
-    React.useEffect(() => {
-        if (!scrollTop) {
-            window.scrollTo(0, 0)
-            setScrollTop(true)
+        this.state = {
+            category: null,
+            selectedList: [],
+            myPrice: 0,
+            quantity: 0,
+            // scrollTop: true,
+            deliveryPrice: 0,
+            alert: false,
+            review: { show: false, reviewData: null }
         }
-    })
-
-    const submitOrder = () => {
-        console.log(selectedList)
-        if (selectedList.includes(undefined) || selectedList.length === 0) {
-            showAlert(true)
-            return;
-        }
-
-        review.show = true
-
-        review.reviewData = {
-            selectedList,
-            quantity,
-            myPrice,
-            deliveryPrice
-        }
-
-        updateReview(review)
-
-        console.log(review)
     }
 
-    return (
-        <div className='w-full h-auto pt-16'>
-            <AlertMessage message={ERROR_MESSAGE} show={alert} closeCallback={() => showAlert(false)} />
-            <Review />
-            <ImageContainer>
-                <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{category.title}</Text>
-                <img src={category.img} alt={category.title} className='h-full' />
-            </ImageContainer>
+    componentDidMount() {
+        const { categoryId } = this.props.match.params
 
-            <Text className='text-gray-800 mb-8 mt-5' fontSize={SMALL_TEXT}>
-                {CATEGORY_DESCRIPTION}
-            </Text>
+        this.setState({
+            category: data[categoryId - 1]
+        })
+        // const category = data[categoryId - 1]
+        window.scrollTo(0, 0)
+    }
 
-            {
-                category.optionsList.map((options, index) => <Option 
-                    updateList={updateList}
-                    key={index}
-                    optionData={options}
-                    selectedList={selectedList}
-                    optionIndex={index}
-                />)
+    // const { categoryId } = useParams()
+    
+    // const [selectedList, updateList] = React.useState([])
+    // const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
+    // const [quantity, setQuantity] = React.useState(0)
+    // const [scrollTop, setScrollTop] = React.useState(false)
+    // const [deliveryPrice, setDeliveryPrice] = React.useState(category.shippingPrice)
+    // const [alert, showAlert] = React.useState(false)
+    // const [review, updateReview] = React.useState({ show: false, reviewData: null })
+
+    // React.useEffect(() => {
+    //     if (!scrollTop) {
+    //         window.scrollTo(0, 0)
+    //         setScrollTop(true)
+    //     }
+    // }, [scrollTop])
+
+    submitOrder = () => {
+        if (this.state.selectedList.includes(undefined) || this.state.selectedList.length === 0) {
+            this.setState({ alert: true })
+            return;
+        }
+        // showAlert(false)
+        this.setState({
+            review: {
+                show: true,
+                reviewData: {
+                    selectedList: this.state.selectedList,
+                    quantity: this.state.quantity,
+                    myPrice: this.state.myPrice,
+                    deliveryPrice: this.state.deliveryPrice
+                }
             }
-            
-            <div className='my-8'>
-                <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
-                    {CHOOSE_PRICE_TITLE}
+        })
+
+        // updateReview(review)
+
+        // console.log(review)
+    }
+
+    render() {
+        return this.state.category ? (
+            <div className='w-full h-auto pt-16'>
+                <AlertMessage message={ERROR_MESSAGE} show={this.state.alert} closeCallback={() => this.setState({ alert: false })} />
+                {/* {review.show ? <Review /> : null} */}
+
+                <ImageContainer>
+                    <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{this.state.category.title}</Text>
+                    <img src={this.state.category.img} alt={this.state.category.title} className='h-full' />
+                </ImageContainer>
+
+                <Text className='text-gray-800 mb-8 mt-5' fontSize={SMALL_TEXT}>
+                    {CATEGORY_DESCRIPTION}
                 </Text>
 
-                <div className='mx-4'>
-                    <Slider 
-                        onChange={(val) => (setMyPrice(val))} 
-                        min={category.minPrice}
-                        max={category.maxPrice}
-                    />
-                    <div className='flex justify-between my-3'>
-                        <Text className='text-gray-800' fontSize={SMALL_TEXT}>
-                            Minimum Prix: {category.minPrice} CFA
-                        </Text>
-                        <Text className='text-gray-800' fontSize={SMALL_TEXT}>
-                            Votre Prix: {myPrice} CFA
-                        </Text>
-                        <Text className='text-gray-800' fontSize={SMALL_TEXT}>
-                            Maximum Prix: {category.maxPrice} CFA
+                {
+                    this.state.category.optionsList.map((options, index) => <Option 
+                        updateList={(selectedList) => this.setState({ selectedList })}
+                        key={index}
+                        optionData={options}
+                        selectedList={this.state.selectedList}
+                        optionIndex={index}
+                    />)
+                }
+                
+                <div className='my-8'>
+                    <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
+                        {CHOOSE_PRICE_TITLE}
+                    </Text>
+
+                    <div className='mx-4'>
+                        <Slider 
+                            onChange={(val) => {
+                                this.setState(() => ({ myPrice: val }))
+                                console.log(val)
+                            }}
+                            min={this.state.category.minPrice}
+                            max={this.state.category.maxPrice}
+                        />
+                         { this.state.myPrice }
+                        <div className='flex justify-between my-3'>
+                            <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                                Minimum Prix: {this.state.category.minPrice} CFA
+                            </Text>
+                            <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                                Votre Prix: { this.state.myPrice } CFA
+                            </Text>
+                            <Text className='text-gray-800' fontSize={SMALL_TEXT}>
+                                Maximum Prix: {this.state.category.maxPrice} CFA
+                            </Text>
+                        </div>
+
+                        <Text fontSize={SMALL_TEXT} className='text-gray-800'>
+                            {CHOOSE_PRICE_DESCRIPTION}
                         </Text>
                     </div>
-
-                    <Text fontSize={SMALL_TEXT} className='text-gray-800'>
-                        {CHOOSE_PRICE_DESCRIPTION}
-                    </Text>
                 </div>
-            </div>
-            
-            <div className='my-8'>
-                <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
-                    {QUANTITY_TITLE}
-                </Text>
-
-                <div className='mx-4 flex items-center'>
-                    <NumberInput 
-                        value={quantity}
-                        onChange={(direction) => {
-                            if (quantity > 0 || (direction === 1)) {
-                                setQuantity(quantity + direction)
-                                setDeliveryPrice(category.shippingPrice + (category.shippingPrice/2) * (quantity + direction))
-                            }
-                        }}
-                    />
-
-                    <Text fontSize={SMALL_TEXT} className='font-bold'>
-                        {SHIPPING_PRICE_TITLE}: {deliveryPrice} CFA
+                
+                <div className='my-8'>
+                    <Text fontSize={MEDIUM_TEXT} className='font-bold text-gray-800 py-4'>
+                        {QUANTITY_TITLE}
                     </Text>
+
+                    <div className='mx-4 flex items-center'>
+                        <NumberInput 
+                            value={this.state.quantity}
+                            onChange={(direction) => {
+                                if (this.state.quantity > 0 || (direction === 1)) {
+                                    this.setState((prev) => ({
+                                        quantity: prev.quantity + direction,
+                                        deliveryPrice: prev.category.shippingPrice + 
+                                        (prev.category.shippingPrice/2) * (prev.quantity + direction)
+                                    }))
+                                    // setQuantity(quantity + direction)
+                                    // setDeliveryPrice(category.shippingPrice + 
+                                    //     (category.shippingPrice/2) * (quantity + direction))
+                                }
+                            }}
+                        />
+
+                        <Text fontSize={SMALL_TEXT} className='font-bold'>
+                            {SHIPPING_PRICE_TITLE}: {this.state.deliveryPrice} CFA
+                        </Text>
+                    </div>
                 </div>
+
+                <RedButton 
+                    className='my-8'
+                    onClick={this.submitOrder}
+                >
+                    Soumettre La Commande 
+                </RedButton>
+
             </div>
-
-            <RedButton 
-                className='my-8'
-                onClick={submitOrder}
-            >
-                Soumettre La Commande 
-            </RedButton>
-
-        </div>
-    )
+        ) : null
+    }
 }
+
+export default withRouter(CeateOrder);
 
 const Option = ({ optionData, selectedList, optionIndex, updateList }) => {
     const [selected, setActive] = React.useState(-1)

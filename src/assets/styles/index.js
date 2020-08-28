@@ -86,6 +86,13 @@ export const ImageContainer = styled.div.attrs({
 
 /** overlay background */
 export const Overlay = styled.div.attrs({
-    className: `fixed w-screen h-screen z-40 bg-gray-500 opacity-50 
+    className: `fixed w-screen h-screen z-40 bg-gray-500 bg-opacity-50 
     flex justify-center items-center left-0 top-0 right-0 bottom-0`
-}) ``
+}) `
+    & {
+        div {
+            height: 60vh;
+            ${tw`w-1/3 bg-white`}
+        }
+    }
+`

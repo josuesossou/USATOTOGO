@@ -13,7 +13,7 @@ const StyledThumb = styled.div.attrs({
     cursor: grab;
 `
 
-const Thumb = (props, state) => <StyledThumb {...props}></StyledThumb>;
+const Thumb = (props) => <StyledThumb {...props} />;
 
 const StyledTrack = styled.div.attrs((props) => ({
     className:`
@@ -24,7 +24,7 @@ const StyledTrack = styled.div.attrs((props) => ({
     bottom: 0;
 `
 
-const Track = (props, state) => <StyledTrack {...props} index={state.index} currValue={state.currValue} />;
+const Track = (props, state) => <StyledTrack {...props} index={state.index} />;
 
 export default ({ onChange, min, max }) => (
     <StyledSlider
