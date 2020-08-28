@@ -12,6 +12,8 @@ import HomePage from './pages/HomePage'
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import CreateOrder from "./pages/CreateOrderPage"
+import AuthenticationPage from "./pages/AuthenticationPage"
+
 import './App.css';
 
 function App() {
@@ -26,6 +28,10 @@ function App() {
 
                 <Route path="/create-order/:categoryId">
                     <CreateOrder />
+                </Route>
+
+                <Route path="/auth">
+                    <AuthenticationPage />
                 </Route>
             </Switch>
             <Footer />

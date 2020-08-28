@@ -26,14 +26,14 @@ const StyledTrack = styled.div.attrs((props) => ({
 
 const Track = (props, state) => <StyledTrack {...props} index={state.index} />;
 
-export default ({ onChange, min, max }) => (
+export default ({ change, min, max }) => (
     <StyledSlider
         defaultValue={[min + ((max - min)/2)]}
         min={min}
         max={max}
         renderTrack={Track}
         renderThumb={Thumb}
-        onChange={onChange}
+        onChange={change}
         className='flex items-center'
     />
 )

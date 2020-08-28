@@ -10,6 +10,13 @@
             "StackName": "amplify-usatotogo-dev-181214",
             "StackId": "arn:aws:cloudformation:us-east-1:364090414621:stack/amplify-usatotogo-dev-181214/0a733fb0-e269-11ea-93dc-0a531bfc577e",
             "AmplifyAppId": "d3ljik9cep850g"
+        },
+        "categories": {
+            "auth": {
+                "usatotogo811418e4": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"314904473289480\",\"client_secret\":\"62eaf015832b2bca9bdf95b6e2105d24\"},{\"ProviderName\":\"Google\",\"client_id\":\"561406335587-npma2nbjteu1pp4nnmlkra40jr6e14ts.apps.googleusercontent.com\",\"client_secret\":\"p4qMXwk-W0z-6F14o53T9Rcx\"}]"
+                }
+            }
         }
     }
 }

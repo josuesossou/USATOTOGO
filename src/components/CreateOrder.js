@@ -25,7 +25,6 @@ class CeateOrder extends React.Component {
             selectedList: [],
             myPrice: 0,
             quantity: 0,
-            // scrollTop: true,
             deliveryPrice: 0,
             alert: false,
             review: { show: false, reviewData: null }
@@ -34,31 +33,16 @@ class CeateOrder extends React.Component {
 
     componentDidMount() {
         const { categoryId } = this.props.match.params
+        const category = data[categoryId - 1]
 
         this.setState({
-            category: data[categoryId - 1]
+            category,
+            myPrice: category.minPrice + ((category.maxPrice - category.minPrice) / 2),
+            deliveryPrice: data[categoryId - 1].shippingPrice
         })
-        // const category = data[categoryId - 1]
         window.scrollTo(0, 0)
     }
-
-    // const { categoryId } = useParams()
     
-    // const [selectedList, updateList] = React.useState([])
-    // const [myPrice, setMyPrice] = React.useState(category.minPrice + (category.maxPrice - category.minPrice)/2)
-    // const [quantity, setQuantity] = React.useState(0)
-    // const [scrollTop, setScrollTop] = React.useState(false)
-    // const [deliveryPrice, setDeliveryPrice] = React.useState(category.shippingPrice)
-    // const [alert, showAlert] = React.useState(false)
-    // const [review, updateReview] = React.useState({ show: false, reviewData: null })
-
-    // React.useEffect(() => {
-    //     if (!scrollTop) {
-    //         window.scrollTo(0, 0)
-    //         setScrollTop(true)
-    //     }
-    // }, [scrollTop])
-
     submitOrder = () => {
         if (this.state.selectedList.includes(undefined) || this.state.selectedList.length === 0) {
             this.setState({ alert: true })
@@ -70,23 +54,30 @@ class CeateOrder extends React.Component {
                 show: true,
                 reviewData: {
                     selectedList: this.state.selectedList,
-                    quantity: this.state.quantity,
+                    quantity: this.state.quantity + 1,
                     myPrice: this.state.myPrice,
                     deliveryPrice: this.state.deliveryPrice
                 }
             }
         })
 
-        // updateReview(review)
+        console.log(this.state.review)
+    }
 
-        // console.log(review)
+    closeReview = () => {
+        this.setState((prev) => ({
+            review: {
+                show: false,
+                reviewData:  prev.review.reviewData
+            }
+        }))
     }
 
     render() {
         return this.state.category ? (
             <div className='w-full h-auto pt-16'>
                 <AlertMessage message={ERROR_MESSAGE} show={this.state.alert} closeCallback={() => this.setState({ alert: false })} />
-                {/* {review.show ? <Review /> : null} */}
+                {this.state.review.show ? <Review reviewData={this.state.review.reviewData} closeOverlay={this.closeReview} /> : null}
 
                 <ImageContainer>
                     <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{this.state.category.title}</Text>
@@ -114,14 +105,15 @@ class CeateOrder extends React.Component {
 
                     <div className='mx-4'>
                         <Slider 
-                            onChange={(val) => {
+                            change={(val) => {
                                 this.setState(() => ({ myPrice: val }))
-                                console.log(val)
+                                // console.log(val)
+                                console.log('STATE PRICE', this.state.myPrice)
                             }}
                             min={this.state.category.minPrice}
                             max={this.state.category.maxPrice}
                         />
-                         { this.state.myPrice }
+                         
                         <div className='flex justify-between my-3'>
                             <Text className='text-gray-800' fontSize={SMALL_TEXT}>
                                 Minimum Prix: {this.state.category.minPrice} CFA

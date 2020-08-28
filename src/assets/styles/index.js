@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import tw from "twin.macro"
+import { SMALL_TEXT } from './fontSizes'
 
 // export const StyledForm = styled.main.attrs({
 //   className: "flex flex-col h-screen justify-center items-center bg-gray-100",
@@ -90,9 +91,18 @@ export const Overlay = styled.div.attrs({
     flex justify-center items-center left-0 top-0 right-0 bottom-0`
 }) `
     & {
-        div {
+        section {
             height: 60vh;
-            ${tw`w-1/3 bg-white`}
+            ${tw `w-1/3 bg-white px-16 py-4 z-10 flex flex-col justify-around text-gray-800 shadow-lg`}
+        },
+        Text {
+            font-size: ${SMALL_TEXT}
+        }
+        div {
+            ${tw `flex justify-between`}
         }
     }
 `
+export const OverlayClickBg = styled.div.attrs({
+    className: `h-full w-full opacity-0 cursor-pointer z-0 absolute left-0 top-0 right-0 bottom-0`
+})``
