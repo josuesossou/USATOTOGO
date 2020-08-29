@@ -9,6 +9,8 @@
     "autoprefixer": "^9.8.6",
     "aws-amplify": "^3.0.24",
     "babel-plugin-macros": "^2.8.0",
+    "mobx": "^5.15.6",
+    "mobx-react": "^6.3.0",
     "postcss-cli": "^7.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

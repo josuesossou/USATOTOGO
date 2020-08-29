@@ -3,34 +3,38 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
-} from "react-router-dom";
+  // Link,
+  // Redirect,
+  // useHistory,
+  // useLocation
+} from 'react-router-dom';
 import HomePage from './pages/HomePage'
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-import CreateOrder from "./pages/CreateOrderPage"
-import AuthenticationPage from "./pages/AuthenticationPage"
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
+import CreateOrder from './pages/CreateOrderPage'
+import AuthenticationPage from './pages/AuthenticationPage'
+import { User } from './store'
 
 import './App.css';
 
 function App() {
+  const user = new User()
+
   return (
     <Router>
-        <div className="w-full">
-            <Navbar />
+        <div className='w-full'>
+            <Navbar userStore={user} />
             <Switch>
-                <Route exact path="/">
+                <Route exact path='/'>
                     <HomePage />
                 </Route>
 
-                <Route path="/create-order/:categoryId">
+                <PrivateRoute path='/create-order/:categoryId' user={user}>
                     <CreateOrder />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/auth">
+                <Route path='/auth'>
                     <AuthenticationPage />
                 </Route>
             </Switch>

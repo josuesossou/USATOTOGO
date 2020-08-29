@@ -106,3 +106,8 @@ export const Overlay = styled.div.attrs({
 export const OverlayClickBg = styled.div.attrs({
     className: `h-full w-full opacity-0 cursor-pointer z-0 absolute left-0 top-0 right-0 bottom-0`
 })``
+
+/** Nav Lists Styles */
+export const NavLists = styled.div.attrs({
+    className: "flex-1 flex justify-end items-center pr-8"
+})``
