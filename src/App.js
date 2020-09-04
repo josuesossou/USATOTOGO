@@ -12,8 +12,8 @@ import HomePage from './pages/HomePage'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
-import CreateOrder from './pages/CreateOrderPage'
-import AuthenticationPage from './pages/AuthenticationPage'
+import { CreateOrderPage, ChooseProductPage } from './pages/CreateOrderPage'
+import Auth from './components/Auth'
 import { User } from './store'
 
 import './App.css';
@@ -30,12 +30,16 @@ function App() {
                     <HomePage />
                 </Route>
 
-                <PrivateRoute path='/create-order/:categoryId' user={user}>
-                    <CreateOrder />
+                <PrivateRoute path='/create-order/:productName/:productId' user={user}>
+                    <CreateOrderPage />
+                </PrivateRoute>
+
+                <PrivateRoute path='/choose-product/:categoryId' user={user}>
+                    <ChooseProductPage />
                 </PrivateRoute>
 
                 <Route path='/auth'>
-                    <AuthenticationPage />
+                  <Auth />
                 </Route>
             </Switch>
             <Footer />

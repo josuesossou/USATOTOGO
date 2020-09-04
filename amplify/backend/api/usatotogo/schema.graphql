@@ -1,6 +1,27 @@
 type Todo @model {
-  id: ID!
-  name: String!
-  description: String
+    id: ID!
+    name: String!
+    description: String
 }
-# /** Todo **/
+# /** Category **/
+type Category @model {
+    id: ID!
+    img: String!
+    title: String!
+    products: [Product]! @connection(name: "Products")
+}
+
+type Product @model {
+    id: ID!
+    title: String!,
+    img: String,
+    minPrice: Number!,
+    maxPrice: Number!,
+    shippingPrice: Number!,
+    options: [Option] @connection(name: "OptionsList")
+}
+
+type Option @model {
+    title: String!,
+    list: [String]
+}

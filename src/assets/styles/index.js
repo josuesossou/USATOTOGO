@@ -79,7 +79,7 @@ export const CategoryStyle = styled.div.attrs({
 `
 
 /**  This is just a component with blue background color  */
-export const ImageContainer = styled.div.attrs({
+export const ImageHeaderStyle = styled.div.attrs({
     className: 'w-full bg-blue-900 flex justify-between items-end'
 })`
     height: 25vh;
@@ -111,3 +111,12 @@ export const OverlayClickBg = styled.div.attrs({
 export const NavLists = styled.div.attrs({
     className: "flex-1 flex justify-end items-center pr-8"
 })``
+
+/** Loader */
+export const Loader = styled.div.attrs({
+    className: `animate-spin h-12 w-12 border border-black border-l-0 border-r-0 rounded-full
+    border-t-4 border-b-4`,
+    viewBox: "0 0 24 24"
+}) `
+   
+`

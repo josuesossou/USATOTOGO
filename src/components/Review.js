@@ -10,6 +10,12 @@ export default ({ reviewData, closeOverlay }) => {
                 <Text fontSize={MEDIUM_TEXT} className='underline font-bold'>
                     Réviser Votre Commande
                 </Text>
+                
+                <div>
+                    <Text className='font-bold'>Produit: </Text>
+                    <Text>{reviewData.item}</Text>  
+                </div>
+
                 {
                     reviewData.selectedList.map((selected, index) => (
                         <div key={index}>

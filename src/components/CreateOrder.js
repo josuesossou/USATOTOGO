@@ -3,12 +3,13 @@ import Slider from './Slider'
 import NumberInput from './NumberInput'
 import AlertMessage from './AlertMessage'
 import Review from './Review'
+import ImageHeader from './ImageHeader'
 import { withRouter } from 'react-router-dom'
-import { ImageContainer, Text, RedButton, } from '../assets/styles'
-import { SMALL_TEXT, MEDIUM_TEXT, EX_LARGE_TEXT } from '../assets/styles/fontSizes'
+import { Text, RedButton, } from '../assets/styles'
+import { SMALL_TEXT, MEDIUM_TEXT } from '../assets/styles/fontSizes'
 import { 
     CHOOSE_PRICE_DESCRIPTION, 
-    CATEGORY_DESCRIPTION, 
+    PRODUIT_DESCRIPTION, 
     CHOOSE_PRICE_TITLE, 
     QUANTITY_TITLE,
     SHIPPING_PRICE_TITLE,
@@ -32,13 +33,13 @@ class CeateOrder extends React.Component {
     }
 
     componentDidMount() {
-        const { categoryId } = this.props.match.params
-        const category = data[categoryId - 1]
+        const { categoryId, productId } = this.props.match.params
+        const category = data[0].product[productId]
 
         this.setState({
             category,
             myPrice: category.minPrice + ((category.maxPrice - category.minPrice) / 2),
-            deliveryPrice: data[categoryId - 1].shippingPrice
+            deliveryPrice: category.shippingPrice
         })
         window.scrollTo(0, 0)
     }
@@ -48,11 +49,12 @@ class CeateOrder extends React.Component {
             this.setState({ alert: true })
             return;
         }
-        // showAlert(false)
+
         this.setState({
             review: {
                 show: true,
                 reviewData: {
+                    item: this.state.category.title,
                     selectedList: this.state.selectedList,
                     quantity: this.state.quantity + 1,
                     myPrice: this.state.myPrice,
@@ -79,13 +81,10 @@ class CeateOrder extends React.Component {
                 <AlertMessage message={ERROR_MESSAGE} show={this.state.alert} closeCallback={() => this.setState({ alert: false })} />
                 {this.state.review.show ? <Review reviewData={this.state.review.reviewData} closeOverlay={this.closeReview} /> : null}
 
-                <ImageContainer>
-                    <Text fontSize={EX_LARGE_TEXT} className='text-blue-100 ml-4 font-bold'>{this.state.category.title}</Text>
-                    <img src={this.state.category.img} alt={this.state.category.title} className='h-full' />
-                </ImageContainer>
+                <ImageHeader img={this.state.category.img} title={this.state.category.title} />
 
-                <Text className='text-gray-800 mb-8 mt-5' fontSize={SMALL_TEXT}>
-                    {CATEGORY_DESCRIPTION}
+                <Text className='text-gray-800 mb-8 mt-5 font-bold' fontSize={SMALL_TEXT}>
+                    {PRODUIT_DESCRIPTION}
                 </Text>
 
                 {
@@ -147,9 +146,6 @@ class CeateOrder extends React.Component {
                                         deliveryPrice: prev.category.shippingPrice + 
                                         (prev.category.shippingPrice/2) * (prev.quantity + direction)
                                     }))
-                                    // setQuantity(quantity + direction)
-                                    // setDeliveryPrice(category.shippingPrice + 
-                                    //     (category.shippingPrice/2) * (quantity + direction))
                                 }
                             }}
                         />
@@ -207,7 +203,7 @@ const Option = ({ optionData, selectedList, optionIndex, updateList }) => {
 const RadioButton = ({ active }) => {
     return (
         <div className='w-5 h-5 rounded-full border border-3 border-blue-900 flex justify-center items-center mr-3'>
-            {active ? (<div className='bg-blue-800 rounded-full w-2 h-2'></div>) : null}
+            {active ? (<div className='bg-blue-700 rounded-full w-2 h-2'></div>) : null}
         </div>
     )
 }

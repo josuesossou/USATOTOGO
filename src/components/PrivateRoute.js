@@ -1,21 +1,47 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import { Overlay } from '../assets/styles'
+import { Route, Redirect } from 'react-router-dom'
+import { Auth } from 'aws-amplify';
+import { Loader } from '../assets/styles'
 
 export default ({ children, user, ...rest }) => {
+    const [loader, setLoader] = React.useState(true)
+
+    React.useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await Auth.currentAuthenticatedUser();
+                user.setUser = userData.attributes
+                setLoader(false)
+            }
+            catch (e) {
+                user.setUser = null
+                setLoader(false)
+            }
+        };
+        fetchUser();
+    }, [])
+
     return (
         <Route
             {...rest}
-            render={({ location }) =>
-                user.exist ? (
-                    children
-                ) : (
-                    <div className='h-screen p-16'> 
-                        <section></section>
-                        hello world
+            render={({ location }) => (
+                loader ? (
+                    <div className='h-screen flex justify-center items-center'>
+                        <Loader />
                     </div>
+                ) : (
+                    user.exist ? (
+                        children
+                    ) : (
+                        <Redirect
+                            to={{
+                                pathname: "/auth",
+                                state: { from: location }
+                            }}
+                      />
+                    )
                 )
-            }
+            )}
         />
     );
 }

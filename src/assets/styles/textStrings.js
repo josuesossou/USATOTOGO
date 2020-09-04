@@ -1,4 +1,5 @@
-export const CATEGORY_DESCRIPTION = `Choisissez le type de produit que vous souhaitez à commander.`
+export const CATEGORY_DESCRIPTION = `Faiser Votre Choix`
+export const PRODUIT_DESCRIPTION = `Personnalisez Votre Choix`
 export const CHOOSE_PRICE_DESCRIPTION = `
 Lisez attentivement: Ceci s'agit du prix que vous voulez payer pour le produit.
 Si le prix est inférieur, vous risquez la qualité et l'état du produit. Cela signifie que

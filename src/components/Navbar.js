@@ -8,6 +8,8 @@ import { observer } from 'mobx-react';
 Amplify.configure(awsconfig);
 
 export default observer(({ userStore }) => {
+    const [loader, setLoader] = React.useState(true)
+
     React.useEffect(() => {
         Hub.listen('auth', ({ payload: { event, data } }) => {
             switch (event) {
@@ -32,22 +34,24 @@ export default observer(({ userStore }) => {
         try {
             const userData = await Auth.currentAuthenticatedUser();
             userStore.setUser = userData.attributes
-            // return userData;
+            setLoader(false)
         }
         catch (e) {
             userStore.setUser = null
-            console.log('Not signed in');
+            setLoader(false)
         }
     }
     
-    return (
+    return loader ? (
+        <div></div>
+    ) : (
         <div className="w-screen flex h-16 shadow-md fixed bg-white z-50">
             <div className="flex-2 bg-yellow-400">
                 <p>Logo</p> 
             </div>
             <NavLists>
                 <Link to='/'>
-                    <ButtonLink>Home</ButtonLink>
+                    <ButtonLink>Accueil</ButtonLink>
                 </Link>
                 
 
@@ -58,7 +62,7 @@ export default observer(({ userStore }) => {
                                 {userStore.getUser.email}
                             </ButtonLink>
                             <ButtonLink onClick={() => Auth.signOut()}>
-                                Sign Out
+                                Déconnexion
                             </ButtonLink>
                         </>
                     ) : (
@@ -67,7 +71,7 @@ export default observer(({ userStore }) => {
                                 Login
                             </ButtonLink> */}
                             <RedButton onClick={() => Auth.federatedSignIn()}>
-                                Get Started
+                                Commencer
                             </RedButton>
                         </>
                     )

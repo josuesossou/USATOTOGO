@@ -4,14 +4,45 @@ import Computer from '../images/computers.png'
 import TVS from '../images/TVS.png'
 import Camera from '../images/camera.png'
 
+
+
 export default [
     {
         img: GameVid, 
         title: 'Les Jeux Video',
         id: 1,
-        minPrice: 10000,
-        maxPrice: 18000,
-        shippingPrice: 1203,
+        // minPrice: 10000,
+        // maxPrice: 18000,
+        // shippingPrice: 1203,
+        product: [
+            {
+                title: 'PS2 - FAT',
+                img: null,
+                minPrice: 100003,
+                maxPrice: 200000,
+                shippingPrice: 1203,
+                optionsList: [
+                    {
+                        title: 'Combein De Bra Vous Vouler',
+                        options: ['2 manette', '1 manetter', 'sans manette']
+                    },
+                ]
+            }, 
+            {
+                title: 'PS2 - Slim',
+                img: null,
+                minPrice: 100003,
+                maxPrice: 200000,
+                shippingPrice: 1203,
+                optionsList: [
+                    {
+                        title: 'Combein De Bra Vous Vouler',
+                        options: ['2 manette', '1 manetter', 'sans manette']
+                    },
+
+                ]
+            }
+        ],
         optionsList: [
             {
                 title: 'Choisissez La Brand (Title)',

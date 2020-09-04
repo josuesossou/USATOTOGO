@@ -17,7 +17,7 @@ const Category = ({ data }) => {
             <img src={data.img} className='w-full' alt={data.title} />
             <div className='w-full h-12 flex items-center justify-between px-2'>
                 <Text fontSize={'1em'} className='font-bold text-gray-800'>{data.title}</Text>
-                <Link to={`/create-order/${data.id}`}>
+                <Link to={`/choose-product/${data.id}`}>
                     <RedButton className='h-auto'>Ordre</RedButton>
                 </Link>
             </div>
