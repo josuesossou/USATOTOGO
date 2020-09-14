@@ -18,8 +18,6 @@ import Auth from './components/Auth'
 import { User } from './store'
 import './App.css';
 
-
-
 function App() {
   const user = new User()
 
