@@ -26,7 +26,6 @@ export default () => {
                 <div className='flex-2 bg-yellow-400'>
                 </div>
             </div>
-            
         </div>
     )
 }

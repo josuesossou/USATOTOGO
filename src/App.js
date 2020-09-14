@@ -14,9 +14,11 @@ import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import { CreateOrderPage, ChooseProductPage } from './pages/CreateOrderPage'
 import Auth from './components/Auth'
-import { User } from './store'
 
+import { User } from './store'
 import './App.css';
+
+
 
 function App() {
   const user = new User()

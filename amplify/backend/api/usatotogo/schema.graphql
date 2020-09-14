@@ -1,27 +1,22 @@
-type Todo @model {
-    id: ID!
-    name: String!
-    description: String
-}
-# /** Category **/
 type Category @model {
-    id: ID!
-    img: String!
-    title: String!
-    products: [Product]! @connection(name: "Products")
+  id: ID!
+  img: String
+  title: String!
 }
 
 type Product @model {
-    id: ID!
-    title: String!,
-    img: String,
-    minPrice: Number!,
-    maxPrice: Number!,
-    shippingPrice: Number!,
-    options: [Option] @connection(name: "OptionsList")
+  id: ID!
+  title: String
+  img: String
+  minPrice: Int
+  maxPrice: Int
+  shippingPrice: Int
+  categoryTitle: String 
 }
 
 type Option @model {
-    title: String!,
-    list: [String]
+  id: ID!
+  title: String
+  options: [String]
+  productTitle: String
 }

@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "usatotogo811418e4_identitypool_811418e4",
+    "identityPoolName": "usatotogo2c3b151e_identitypool_2c3b151e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "usatot811418e4",
-    "userPoolName": "usatotogo811418e4_userpool_811418e4",
+    "resourceNameTruncated": "usatot2c3b151e",
+    "userPoolName": "usatotogo2c3b151e_userpool_2c3b151e",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "usatot811418e4_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "usatot2c3b151e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "811418e4",
-    "resourceName": "usatotogo811418e4",
+    "sharedId": "2c3b151e",
+    "resourceName": "usatotogo2c3b151e",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -50,7 +50,7 @@
     "usernameAttributes": [
         "email, phone_number"
     ],
-    "hostedUIDomainName": "usatotogo811418e4-811418e4",
+    "hostedUIDomainName": "usatotogo2c3b151e-2c3b151e",
     "authProvidersUserPool": [
         "Facebook",
         "Google"
